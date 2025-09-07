@@ -1,9 +1,7 @@
-import styles from "./page.module.css";
-
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <h1 className="text-3xl text-red-500 font-bold underline">
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <h1 className="text-3xl text-white font-bold">
         Hello world!
       </h1>
     </div>
