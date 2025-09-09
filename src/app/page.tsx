@@ -1,9 +1,15 @@
-export default function Home() {
+import PostsList from "@/components/Post/PostsList";
+import { fetchPosts } from "@/services";
+
+export default async function Home() {
+  const { posts } = await fetchPosts(1, 10);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <h1 className="text-3xl text-white font-bold">
-        Hello world!
-      </h1>
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto max-w-2xl py-8 px-4">
+        <h1 className="text-2xl font-bold mb-6">News Feed</h1>
+        <PostsList initialPosts={posts} />
+      </div>
     </div>
   );
 }

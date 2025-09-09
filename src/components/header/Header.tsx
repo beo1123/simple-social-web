@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { useAuth } from "@/hook/useAuth";
+import { useAuth } from "@/hook/auth/useAuth";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,61 +23,57 @@ export default function Header() {
     };
 
     return (
-        <nav className="sticky top-0 z-50 bg-white border-gray-200 dark:bg-gray-900">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-sm">
+            <div className="max-w-screen-xl flex items-center justify-between mx-auto px-4 py-3 md:py-4">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image
-                        width={300}
-                        height={300}
+                        width={32}
+                        height={32}
                         src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg"
-                        className="h-8"
                         alt="Next.js Logo"
                     />
+                    <span className="hidden sm:block text-lg font-semibold text-gray-800 dark:text-white">NewsFeed</span>
                 </Link>
 
                 {/* Desktop Search */}
-                <div className="flex md:order-1 hidden md:block">
+                <div className="hidden md:flex flex-1 justify-center px-6">
                     <SearchBar onSearch={(q) => console.log("Search desktop:", q)} />
                 </div>
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-gray-500 dark:text-gray-400 focus:outline-none"
+                    className="md:hidden text-gray-600 dark:text-gray-300 focus:outline-none"
                     onClick={() => setSidebarOpen(!sidebarOpen)}
                 >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
                     </svg>
                 </button>
 
                 {/* Desktop Links */}
-                <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-2" id="navbar-search">
+                <div className="hidden md:flex items-center space-x-4 md:order-2">
                     {isAuthenticated ? (
-                        <div>
-                            <PrimaryButton className="px-3 py-1 rounded text-lg" onClick={handleLogOut}>Log Out</PrimaryButton>
-                        </div>
+                        <PrimaryButton className="px-3 py-1 rounded text-sm" onClick={handleLogOut}>Log Out</PrimaryButton>
                     ) : (
-                        <div>
-                            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                                <li>
-                                    <Link
-                                        href="/login"
-                                        className={`block py-2 px-3 rounded-sm ${pathname === "/login" ? "text-blue-700 md:text-blue-700" : "text-gray-900 dark:text-white"} hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:bg-gray-700 md:dark:hover:text-blue-500`}
-                                    >
-                                        Login
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="/signup"
-                                        className={`block py-2 px-3 rounded-sm ${pathname === "/signup" ? "text-blue-700 md:text-blue-700" : "text-gray-900 dark:text-white"} hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:bg-gray-700 md:dark:hover:text-blue-500`}
-                                    >
-                                        Sign Up
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
+                        <ul className="flex items-center space-x-6">
+                            <li>
+                                <Link
+                                    href="/login"
+                                    className={`text-sm font-medium ${pathname === "/login" ? "text-blue-600" : "text-gray-700 dark:text-gray-200"} hover:text-blue-600`}
+                                >
+                                    Login
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/signup"
+                                    className={`text-sm font-medium ${pathname === "/signup" ? "text-blue-600" : "text-gray-700 dark:text-gray-200"} hover:text-blue-600`}
+                                >
+                                    Sign Up
+                                </Link>
+                            </li>
+                        </ul>
                     )}
                 </div>
             </div>

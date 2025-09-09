@@ -1,4 +1,4 @@
-import { login, resetUsers, signup } from "../services/auth";
+import { login, resetUsers, signup } from "../../services/auth";
 
 beforeAll(() => {
     // Simple mock localStorage
