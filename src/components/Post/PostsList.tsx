@@ -42,7 +42,7 @@ export default function PostsList({ initialPosts }: { initialPosts: Post[] }) {
 
             {/* Lazyload chỉ bật khi không search/filter */}
             {!searchQuery && !filterByUser && hasNextPage && (
-                <div ref={ref} className="h-10">
+                <div ref={ref} className="h-10 ">
                     {isFetchingNextPage && <PostListLoading />}
                 </div>
             )}

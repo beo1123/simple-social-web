@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { setSearchQuery } from '@/features/search/searchSlice';
@@ -18,9 +18,11 @@ export default function SearchBar({ placeholder = "Search posts...", className, 
     const [localValue, setLocalValue] = useState(searchQuery);
     const debouncedValue = useDebounce(localValue, delay);
 
-    if (debouncedValue !== searchQuery) {
-        dispatch(setSearchQuery(debouncedValue));
-    }
+    useEffect(() => {
+        if (debouncedValue !== searchQuery) {
+            dispatch(setSearchQuery(debouncedValue));
+        }
+    }, [debouncedValue, searchQuery, dispatch]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setLocalValue(e.target.value);
