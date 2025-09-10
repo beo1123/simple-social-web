@@ -36,13 +36,3 @@
   - Incorrect sorting: Verify `timestamp` in posts.
   - User filter empty: Check user list derivation in `Header.tsx`.
 
-## Testing New Features
-- **Search and Filter**:
-  - On `/`, search for "hello", verify matching posts (title/body).
-  - Change sort to "Oldest First", verify order.
-  - Filter by user (e.g., "User 1"), verify results.
-- **Nested Comments**:
-  - On `/posts/1`, add a comment, reply to it, verify indentation and `parentId` in `localStorage`.
-- **Like/Share**:
-  - Like a comment, verify count in UI and `localStorage`.
-  - Share a comment, paste link (e.g., `/posts/1#comment-uuid`), confirm navigation.
